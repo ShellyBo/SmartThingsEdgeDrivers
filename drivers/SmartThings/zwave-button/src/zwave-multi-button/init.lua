@@ -13,11 +13,11 @@
 -- limitations under the License.
 
 local capabilities = require "st.capabilities"
---- @type st.zwave.CommandClass
+-- @type st.zwave.CommandClass
 local cc = require "st.zwave.CommandClass"
---- @type st.zwave.CommandClass.CentralScene
+-- @type st.zwave.CommandClass.CentralScene
 local CentralScene = (require "st.zwave.CommandClass.CentralScene")({ version=1 })
---- @type st.zwave.CommandClass.SceneActivation
+-- @type st.zwave.CommandClass.SceneActivation
 local SceneActivation = (require "st.zwave.CommandClass.SceneActivation")({ version=1 })
 
 local ZWAVE_MULTI_BUTTON_FINGERPRINTS = {
@@ -34,7 +34,9 @@ local ZWAVE_MULTI_BUTTON_FINGERPRINTS = {
   {mfr = 0x0086, prod = 0x0102, model = 0x0081}, -- Aeotec Wallmote US
   {mfr = 0x0060, prod = 0x000A, model = 0x0003}, -- Everspring Remote Control
   {mfr = 0x0086, prod = 0x0001, model = 0x0003}, -- Aeotec Mimimote,
-  {mfr = 0x0371, prod = 0x0102, model = 0x0016}  -- Aeotec illumino Wallmote 7,
+  {mfr = 0x0371, prod = 0x0102, model = 0x0016}, -- Aeotec illumino Wallmote 7,
+  {mfr = 0x0460, prod = 0x0009, model = 0x0081}, -- Wave i4,
+  {mfr = 0x0460, prod = 0x0009, model = 0x0082}  -- Wave i4DC,
 }
 
 local function can_handle_zwave_multi_button(opts, driver, device, ...)
@@ -117,7 +119,8 @@ local zwave_multi_button = {
   sub_drivers = {
     require("zwave-multi-button/aeotec-keyfob"),
     require("zwave-multi-button/fibaro-keyfob"),
-    require("zwave-multi-button/aeotec-minimote")
+    require("zwave-multi-button/aeotec-minimote"),
+    require("zwave-multi-button/shelly-wave-i4")
   }
 }
 

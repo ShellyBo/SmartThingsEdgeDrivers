@@ -13,10 +13,12 @@
 -- limitations under the License.
 
 local capabilities = require "st.capabilities"
---- @type st.zwave.defaults
+-- @type st.zwave.defaults
 local defaults = require "st.zwave.defaults"
---- @type st.zwave.Driver
+-- @type st.zwave.Driver
 local ZwaveDriver = require "st.zwave.driver"
+local Configuration = (require "st.zwave.CommandClass.Configuration")({ version=4 })
+local preferencesMap = require "preferences"
 local configsMap = require "configurations"
 
 local function added_handler(self, device)
@@ -33,6 +35,16 @@ local function added_handler(self, device)
   end
 end
 
+local function info_changed(driver, device, event, args)
+  local preferences = preferencesMap.get_device_parameters(device)
+  for id, value in pairs(device.preferences) do
+    if args.old_st_store.preferences[id] ~= value and preferences and preferences[id] then
+      local new_parameter_value = preferencesMap.to_numeric_value(device.preferences[id])
+      device:send(Configuration:Set({parameter_number = preferences[id].parameter_number, size = preferences[id].size, configuration_value = new_parameter_value}))
+    end
+  end
+end
+
 local driver_template = {
   supported_capabilities = {
     capabilities.button,
@@ -40,6 +52,7 @@ local driver_template = {
   },
   lifecycle_handlers = {
     added = added_handler,
+    infoChanged = info_changed,
   },
   sub_drivers = {
     require("zwave-multi-button"),
@@ -48,6 +61,6 @@ local driver_template = {
 }
 
 defaults.register_for_default_handlers(driver_template, driver_template.supported_capabilities)
---- @type st.zwave.Driver
+-- @type st.zwave.Driver
 local button = ZwaveDriver("zwave_button", driver_template)
 button:run()

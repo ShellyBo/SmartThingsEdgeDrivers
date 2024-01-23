@@ -1,0 +1,97 @@
+name: wave-i4DC
+components:
+  - id: main
+    capabilities:
+    - id: button
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: RemoteController
+  - id: button1
+    capabilities:
+    - id: button
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: Button
+  - id: button2
+    capabilities:
+    - id: button
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: Button
+  - id: button3
+    capabilities:
+    - id: button
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: Button
+  - id: button4
+    capabilities:
+    - id: button
+      version: 1
+    - id: refresh
+      version: 1
+    categories:
+    - name: Button
+preferences:
+  - name: "input1SwitchType"
+    title: "P1-SW1 switch type"
+    description: "This parameter defines how the Device should treat the switch (which type) connected to the SW (SW1) terminal."
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0 : "Momentary switch"
+        1 : "Toggle switch (CL-ON/OP-OFF)"
+        2 : "Toggle switch (device)" 
+      default: 2
+  - name: "input2SwitchType"
+    title: "P2-SW2 switch type"
+    description: "This parameter defines how the Device should treat the switch (which type) connected to the SW2 terminal."
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0 : "Momentary switch"
+        1 : "Toggle switch (CL-ON/OP-OFF)"
+        2 : "Toggle switch (device)" 
+      default: 2
+  - name: "input3SwitchType"
+    title: "P3-SW3 switch type"
+    description: "This parameter defines how the Device should treat the switch (which type) connected to the SW2 terminal."
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0 : "Momentary switch"
+        1 : "Toggle switch (CL-ON/OP-OFF)"
+        2 : "Toggle switch (device)" 
+      default: 2
+  - name: "input4SwitchType"
+    title: "P4-SW4 switch type"
+    description: "This parameter defines how the Device should treat the switch (which type) connected to the SW2 terminal."
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0 : "Momentary switch"
+        1 : "Toggle switch (CL-ON/OP-OFF)"
+        2 : "Toggle switch (device)" 
+      default: 2
+  - name: "factoryReset"
+    title: "P120-Factory reset"
+    description: "Reset to factory default settings and removed from the Z-Wave network."
+    required: false
+    preferenceType: enumeration
+    definition:
+      options:
+        0 : "No action"
+        1 : "Factory Reset"
+      default: 0
